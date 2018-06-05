@@ -13,7 +13,7 @@ int main(int argc, char const *argv[])
     struct sockaddr_in address;
     int sock = 0, valread;
     struct sockaddr_in serv_addr;
-    char hello[20];
+    char hello[20] /*= "Hello from client"*/;
     char buffer[1024] = {0};
     printf("please input the data:");
     scanf("%s",&hello);
@@ -42,7 +42,7 @@ int main(int argc, char const *argv[])
         return -1;
     }
     send(sock , hello , strlen(hello) , 0 );
-    printf("Hello message sent\n");
+    printf("Client message sent\n");
     valread = read( sock , buffer, 1024);
     printf("%s\n",buffer );
     return 0;
