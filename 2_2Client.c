@@ -44,14 +44,14 @@ int main(int argc,char **argv)
     serv_addr.sin_port = htons(atoi(argv[2]));  
     inet_pton(AF_INET, argv[1], &serv_addr.sin_addr);  
      
-    i_ret = connect(sock_id, (struct sockaddr *)&serv_addr, sizeof(struct sockaddr));  
+    i_ret = connect(sock_id, (struct sockaddr *)&serv_addr, sizeof(struct sockaddr));  //// connect（）系统调用将由文件描述符sockfd引用的套接字连接到由addr指定的地址。Client和Server连接上了
     if (-1 == i_ret) 
     {  
         printf("Connect socket failed\n");  
        return -1;  
     }  
 /*<-------------------------------------client send part---------------------------------->*/ 
-    bzero(buf, MAXLINE);  
+    bzero(buf, MAXLINE);  //置字节字符串s的前n个字节为零且包括‘\0’
     while ((read_len = fread(buf, sizeof(char), MAXLINE, fp)) >0 ) 
     {  
         send_len = send(sock_id, buf, read_len, 0);  
@@ -68,4 +68,3 @@ int main(int argc,char **argv)
     printf("Send Finish\n");  
     return 0;  
 }  
-
